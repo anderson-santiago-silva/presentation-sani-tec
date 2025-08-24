@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposition d'Amélioration Axée sur les Processus</title>
+    <title>Proposition d'Amélioration Axée sur les Processus - Sani-tec</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -13,22 +13,65 @@
             --couleur-fundo: #f4f7f9;
             --couleur-texte-sombre: #333;
             --couleur-texte-clair: #fff;
-            --ombre-boite: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --ombre-boite: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
+            --ombre-leve: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
+            padding-top: 60px; /* Espaço para a barra de navegação fixa */
             background-color: var(--couleur-fundo);
             color: var(--couleur-texte-sombre);
             line-height: 1.6;
+            scroll-behavior: smooth; /* Para rolagem suave */
         }
+
+        /* --- NAVEGAÇÃO FIXA (NOVO) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: var(--couleur-primaire);
+            box-shadow: var(--ombre-boite);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-list a {
+            color: var(--couleur-texte-clair);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .nav-list a:hover {
+            border-color: var(--couleur-secondaire);
+            color: var(--couleur-secondaire);
+        }
+        /* ----------------------------- */
 
         .logo {
             position: absolute;
             top: 20px;
             left: 20px;
             height: 60px;
+            z-index: 1001; /* Garante que o logo fique acima de tudo */
         }
 
         .container {
@@ -42,6 +85,15 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeIn 0.8s forwards;
+            background-color: var(--couleur-texte-clair); /* Fundo branco para as seções */
+            box-shadow: var(--ombre-leve); /* Sombra sutil para destacar a seção */
+            margin-bottom: 3rem; /* Espaço maior entre seções */
+        }
+        
+        section:first-of-type {
+            padding: 0; /* A capa não precisa de padding extra */
+            margin-bottom: 0;
+            box-shadow: none;
         }
 
         @keyframes fadeIn {
@@ -53,7 +105,7 @@
 
         /* Diapositive 1: Page de garde */
         .slide-cover {
-            background: linear-gradient(135deg, var(--couleur-primaire), #007bff);
+            background: linear-gradient(135deg, var(--couleur-primaire) 0%, #007bff 100%);
             color: var(--couleur-texte-clair);
             display: flex;
             align-items: center;
@@ -61,18 +113,37 @@
             text-align: center;
             min-height: 100vh;
             padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Adicionar um padrão sutil de fundo (OPCIONAL) */
+        .slide-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.05);
+            background-image: radial-gradient(#ffffff20 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
         }
 
         .slide-cover h1 {
-            font-size: 3.5rem;
+            font-size: 4rem; /* Título maior */
             font-weight: 700;
             margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .slide-cover p {
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Subtítulo maior */
             font-weight: 300;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            border-top: 2px solid var(--couleur-secondaire);
+            padding-top: 1rem;
+            display: inline-block;
         }
 
         /* Titres des sections */
@@ -83,7 +154,7 @@
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem; /* Título de seção maior */
             font-weight: 700;
             color: var(--couleur-primaire);
             display: inline-block;
@@ -94,8 +165,8 @@
         .section-title h2::after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
+            width: 100px; /* Linha de destaque maior */
+            height: 5px;
             background: var(--couleur-secondaire);
             margin: 0.5rem auto 0;
             border-radius: 2px;
@@ -108,56 +179,71 @@
             border-radius: 10px;
             box-shadow: var(--ombre-boite);
             margin-bottom: 3rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .problem-section:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
         .problem-section h3 {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 600;
             color: var(--couleur-primaire);
             margin-top: 0;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--couleur-secondaire);
+            border-bottom: 3px solid var(--couleur-secondaire);
         }
 
         .problem-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Colunas mais largas */
+            gap: 2rem; /* Espaçamento maior */
+            margin-top: 2rem;
         }
 
         .detail-box {
             background-color: #f8f9fa;
             padding: 1.5rem;
             border-radius: 8px;
-            border-left: 4px solid var(--couleur-secondaire);
+            border-left: 5px solid var(--couleur-secondaire); /* Borda mais grossa */
+            box-shadow: var(--ombre-leve);
         }
         
         .detail-box h4 {
-            margin: 0 0 0.5rem;
-            font-weight: 600;
+            margin: 0 0 0.75rem;
+            font-weight: 700;
             color: var(--couleur-secondaire);
+            font-size: 1.1rem;
         }
 
         /* Maintien à long terme */
         .long-term-list {
             list-style: none;
             padding: 0;
-        }
-
-        .long-term-list li {
-            background-color: var(--couleur-texte-clair);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: var(--ombre-boite);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 1.5rem;
         }
 
+        .long-term-list li {
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--ombre-boite);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            background-color: var(--couleur-texte-clair);
+            transition: background-color 0.3s;
+        }
+        
+        .long-term-list li:hover {
+            background-color: #f0f3f5;
+        }
+
         .long-term-list li .fa-clipboard-check {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--couleur-primaire);
             flex-shrink: 0;
         }
@@ -167,128 +253,212 @@
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
         }
 
         .benefits-list li {
             background-color: var(--couleur-texte-clair);
-            padding: 1.5rem;
-            border-radius: 8px;
+            padding: 2rem;
+            border-radius: 10px;
             box-shadow: var(--ombre-boite);
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            transition: background-color 0.3s;
+            gap: 1.5rem;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .benefits-list li:hover {
             background-color: var(--couleur-secondaire);
             color: var(--couleur-texte-clair);
+            transform: translateY(-5px);
         }
 
         .benefits-list li:hover .fa-check-circle {
-            color: var(--couleur-texte-clair);
+            color: var(--couleur-texte-clair) !important;
         }
 
         .benefits-list li .fa-check-circle {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--couleur-secondaire);
             flex-shrink: 0;
+            margin-top: 0.25rem;
         }
 
         /* Chronologie */
         .timeline {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 3rem;
+            padding: 0 20px;
+            position: relative;
+        }
+        /* Linha central */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--couleur-secondaire);
+            transform: translateX(-50%);
+            z-index: 0;
         }
 
         .timeline-item {
             display: flex;
             position: relative;
             background-color: var(--couleur-texte-clair);
-            padding: 1.5rem 2rem;
+            padding: 2rem;
             border-radius: 10px;
             box-shadow: var(--ombre-boite);
             align-items: center;
-            gap: 2rem;
+            gap: 3rem;
+            width: 50%; /* Faz o item ficar em um lado */
+            z-index: 1;
         }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background-color: var(--couleur-primaire);
-            z-index: -1;
+        .timeline-item:nth-child(odd) {
+            margin-right: auto;
+            align-self: flex-start;
+            /* Triângulo apontando para o centro */
+            border-right: 20px solid var(--couleur-texte-clair);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
         }
-        
-        .timeline-item:first-child::before { top: 50%; }
-        .timeline-item:last-child::before { bottom: 50%; }
+
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+            align-self: flex-end;
+            flex-direction: row-reverse; /* Inverte para o marcador ir para a direita */
+            /* Triângulo apontando para o centro */
+            border-left: 20px solid var(--couleur-texte-clair);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
 
         .timeline-step {
-            width: 40px;
-            height: 40px;
-            background-color: var(--couleur-secondaire);
+            width: 50px;
+            height: 50px;
+            background-color: var(--couleur-primaire);
             color: var(--couleur-texte-clair);
+            border: 4px solid var(--couleur-secondaire);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            font-size: 1.5rem;
             flex-shrink: 0;
-            z-index: 1;
+            z-index: 2; /* Fica acima da linha central */
         }
         
         .timeline-content h4 {
-            font-size: 1.25rem;
-            color: var(--couleur-primaire);
+            font-size: 1.5rem;
+            color: var(--couleur-secondaire);
             margin: 0;
         }
         
         .timeline-content p {
             margin: 0.5rem 0 0;
         }
+        
+        /* Ajuste de posição para o marcador da timeline (desktop) */
+        .timeline-item:nth-child(odd) .timeline-step {
+            position: absolute;
+            right: -70px; /* Posiciona no centro da linha */
+        }
+
+        .timeline-item:nth-child(even) .timeline-step {
+            position: absolute;
+            left: -70px;
+        }
+
 
         /* Pied de page */
         .footer {
             text-align: center;
-            padding: 3rem 0;
+            padding: 4rem 0;
             background-color: var(--couleur-primaire);
             color: var(--couleur-texte-clair);
             margin-top: 5rem;
         }
+        
+        .footer h2 {
+            font-size: 2rem;
+            color: var(--couleur-secondaire);
+            margin-bottom: 1rem;
+        }
+        
+        .footer p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .navbar { justify-content: flex-start; padding: 0 1rem; }
+            .nav-list { gap: 10px; }
+            .nav-list a { font-size: 0.8rem; }
+            .timeline::before { left: 20px; transform: none; }
+            .timeline-item { 
+                width: 100%; 
+                margin-left: 0 !important; 
+                margin-right: 0 !important;
+                flex-direction: row; /* Volta à direção normal */
+                border: none;
+                padding: 1.5rem 1rem 1.5rem 3rem;
+            }
+            .timeline-item:nth-child(odd) .timeline-step,
+            .timeline-item:nth-child(even) .timeline-step {
+                position: absolute;
+                left: 0px; /* Alinha o marcador à linha */
+                transform: translateX(-50%);
+            }
+            .timeline-item:nth-child(even) {
+                flex-direction: row; /* Garante que o marcador fique à esquerda */
+            }
+        }
 
         @media (max-width: 768px) {
-            .slide-cover h1 { font-size: 2.5rem; }
-            .slide-cover p { font-size: 1.2rem; }
+            body { padding-top: 50px; }
+            .navbar { height: 50px; }
+            .nav-list { display: none; } /* Oculta a navegação em telas pequenas, pode ser substituído por um menu hambúrguer */
+            .logo { top: 10px; left: 10px; height: 30px; }
+            .slide-cover h1 { font-size: 2.8rem; }
+            .slide-cover p { font-size: 1.4rem; }
             .problem-details { grid-template-columns: 1fr; }
-            .timeline-item { flex-direction: column; text-align: center; }
-            .timeline-item::before { left: 50%; transform: translateX(-50%); }
-            .timeline-step { margin: 0 auto 1rem; }
             .benefits-list { grid-template-columns: 1fr; }
-            .logo { height: 40px; }
         }
     </style>
 </head>
 <body>
-    <img src="logo_sanit_tec.webp" alt="Logo Sani-tec" class="logo">
+    
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#problemes">Problèmes</a></li>
+            <li><a href="#maintien">Maintien</a></li>
+            <li><a href="#benefices">Bénéfices</a></li>
+            <li><a href="#echeancier">Échéancier</a></li>
+        </ul>
+    </nav>
+    <img src="URL_DA_SUA_IMAGEM_AQUI" alt="Logo Sani-tec" class="logo">
 
-    <section class="slide-cover" style="animation-delay: 0s;">
+    <section class="slide-cover" id="accueil" style="animation-delay: 0s;">
         <div class="container">
             <h1>PROPOSITION D'AMÉLIORATION AXÉE SUR LES PROCESSUS</h1>
             <p>Optimisation des processus et du flux de travail</p>
         </div>
     </section>
 
-    <section class="container" style="animation-delay: 0.5s;">
+    <section class="container" id="problemes" style="animation-delay: 0.5s;">
         <div class="section-title">
-            <h2>Problème 1: Espaces morts et manque de zone de réception</h2>
+            <h2>Problèmes Identifiés</h2>
         </div>
         <div class="problem-section">
+            <h3>Problème 1: Espaces morts et manque de zone de réception</h3>
             <div class="problem-details">
                 <div class="detail-box">
                     <h4>SITUATION</h4>
@@ -308,17 +478,13 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="container" style="animation-delay: 1s;">
-        <div class="section-title">
-            <h2>Problème 2: Produits mal placés</h2>
-        </div>
+        
         <div class="problem-section">
+            <h3>Problème 2: Produits mal placés</h3>
             <div class="problem-details">
                 <div class="detail-box">
                     <h4>SITUATION</h4>
-                    <p>Produits en désordre, personnel qui connaît pas les emplacements, perte de temps, commandes en retard, manque de planification pour les grosses livraisons.</p>
+                    <p>Produtos em désordre, personnel qui connaît pas les emplacements, perte de temps, commandes en retard, manque de planification pour les grosses livraisons.</p>
                 </div>
                 <div class="detail-box">
                     <h4>ACTION</h4>
@@ -334,13 +500,9 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="container" style="animation-delay: 1.5s;">
-        <div class="section-title">
-            <h2>Problème 3: Manque de documentation et de standardisation</h2>
-        </div>
+        
         <div class="problem-section">
+            <h3>Problème 3: Manque de documentation et de standardisation</h3>
             <div class="problem-details">
                 <div class="detail-box">
                     <h4>SITUATION</h4>
@@ -360,13 +522,9 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="container" style="animation-delay: 2s;">
-        <div class="section-title">
-            <h2>Problème 4: Système de commande automatique</h2>
-        </div>
+        
         <div class="problem-section">
+            <h3>Problème 4: Système de commande automatique</h3>
             <div class="problem-details">
                 <div class="detail-box">
                     <h4>SITUATION</h4>
@@ -388,37 +546,37 @@
         </div>
     </section>
 
-    <section class="container" style="animation-delay: 2.5s;">
+    <section class="container" id="maintien" style="animation-delay: 1s;">
         <div class="section-title">
             <h2>Maintien de l'Ordre à Long Terme</h2>
         </div>
         <ul class="long-term-list">
-            <li><i class="fas fa-clipboard-check"></i> Désigner un responsable quotidien ou hebdomadaire pour s'assurer que les produits sont remis au bon endroit.</li>
-            <li><i class="fas fa-clipboard-check"></i> Créer des listes de vérification visuelles et des routines d'inspection rapide au début et à la fin de chaque quart de travail.</li>
-            <li><i class="fas fa-clipboard-check"></i> Établir une signalisation claire et des zones de stockage pour éviter les obstructions.</li>
-            <li><i class="fas fa-clipboard-check"></i> Mettre en place des routines de réapprovisionnement continu pour éviter l'accumulation de produits.</li>
-            <li><i class="fas fa-clipboard-check"></i> Communiquer de manière constante avec l'équipe pour renforcer la culture de la discipline et de la responsabilité individuelle.</li>
+            <li><i class="fas fa-clipboard-check"></i> **Désigner un responsable quotidien ou hebdomadaire** pour s'assurer que les produits sont remis au bon endroit.</li>
+            <li><i class="fas fa-clipboard-check"></i> **Créer des listes de vérification visuelles** et des routines d'inspection rapide au début et à la fin de chaque quart de travail.</li>
+            <li><i class="fas fa-clipboard-check"></i> **Établir une signalisation claire** et des zones de stockage pour éviter les obstructions et standardiser l'organisation.</li>
+            <li><i class="fas fa-clipboard-check"></i> **Mettre en place des routines de réapprovisionnement continu** pour éviter l'accumulation de produits et l'encombrement.</li>
+            <li><i class="fas fa-clipboard-check"></i> **Communiquer de manière constante** avec l'équipe pour renforcer la culture de la discipline et de la responsabilité individuelle.</li>
         </ul>
     </section>
 
-    <section class="container" style="animation-delay: 3s;">
+    <section class="container" id="benefices" style="animation-delay: 1.5s;">
         <div class="section-title">
             <h2>Gains et Bénéfices Supplémentaires</h2>
         </div>
         <ul class="benefits-list">
             <li><i class="fas fa-check-circle"></i> Optimisation de l'espace et de la capacité de stockage.</li>
             <li><i class="fas fa-check-circle"></i> Réduction des erreurs, du retravail et des déplacements inutiles.</li>
-            <li><i class="fas fa-check-circle"></i> Sécurité opérationnelle accrue.</li>
+            <li><i class="fas fa-check-circle"></i> Sécurité opérationnelle accrue (moins de risques de trébuchement et d'accidents).</li>
             <li><i class="fas fa-check-circle"></i> Maintien de la discipline et de l'ordre dans les allées.</li>
-            <li><i class="fas fa-check-circle"></i> Contrôle des livraisons et moins de surcharge.</li>
+            <li><i class="fas fa-check-circle"></i> Contrôle des livraisons et moins de surcharge (surcharge d'inventaire).</li>
             <li><i class="fas fa-check-circle"></i> Responsabilisation et engagement du personnel.</li>
-            <li><i class="fas fa-check-circle"></i> Base pour de futures automatisations.</li>
+            <li><i class="fas fa-check-circle"></i> Base solide pour de futures automatisations.</li>
             <li><i class="fas fa-check-circle"></i> Moins de fatigue et meilleure productivité.</li>
             <li><i class="fas fa-check-circle"></i> Durabilité de l'organisation à long terme.</li>
         </ul>
     </section>
 
-    <section class="container" style="animation-delay: 3.5s;">
+    <section class="container" id="echeancier" style="animation-delay: 2s;">
         <div class="section-title">
             <h2>Échéancier d'Exécution</h2>
         </div>
@@ -426,28 +584,28 @@
             <div class="timeline-item">
                 <div class="timeline-step">1</div>
                 <div class="timeline-content">
-                    <h4>Réorganisation des étagères</h4>
+                    <h4>Réorganisation des étagères et création de la zone de réception</h4>
                     <p>Durée: 1-2 jours | Responsable: Équipe interne ou contractée</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-step">2</div>
                 <div class="timeline-content">
-                    <h4>Réapprovisionnement et adressage</h4>
+                    <h4>Réapprovisionnement, adressage et signalisation</h4>
                     <p>Durée: 1-2 jours | Responsable: Équipe d'entrepôt</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-step">3</div>
                 <div class="timeline-content">
-                    <h4>Documentation des processus</h4>
+                    <h4>Documentation des processus et formation initiale</h4>
                     <p>Durée: 3-5 jours | Responsable: Employé désigné / gestionnaire</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-step">4</div>
                 <div class="timeline-content">
-                    <h4>Système automatisé de commandes</h4>
+                    <h4>Implémentation du Système automatisé de commandes et d'itinéraires</h4>
                     <p>Durée: 3-4 semaines | Responsable: Employé désigné / équipe logistique</p>
                 </div>
             </div>
@@ -457,7 +615,7 @@
     <div class="footer">
         <div class="container">
             <h2>Prochaines Étapes</h2>
-            <p>Nous sommes prêts à commencer la transformation. Cette proposition est la première étape vers une opération plus robuste, efficace et stratégique. Nous sommes disponibles pour répondre à vos questions et démarrer le projet.</p>
+            <p>Nous sommes prêts à commencer la transformation. Cette proposition est la première étape vers une opération plus robuste, efficace et stratégique. Nous sommes disponibles pour répondre à vos questions et démarrer le projet sans délai.</p>
         </div>
     </div>
 
